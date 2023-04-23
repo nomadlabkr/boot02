@@ -1,6 +1,7 @@
 package com.nomadlab.boot01.controller;
 
 import com.nomadlab.boot01.dto.BoardDTO;
+import com.nomadlab.boot01.dto.BoardListReplyCountDTO;
 import com.nomadlab.boot01.dto.PageRequestDTO;
 import com.nomadlab.boot01.dto.PageResponseDTO;
 import com.nomadlab.boot01.service.BoardService;
@@ -25,8 +26,8 @@ public class BoardController {
 
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model) {
-        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
-
+        //PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+        PageResponseDTO<BoardListReplyCountDTO> responseDTO = boardService.listWithReplyCount(pageRequestDTO);
         log.info(responseDTO);
 
         model.addAttribute("responseDTO", responseDTO);

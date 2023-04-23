@@ -2,6 +2,7 @@ package com.nomadlab.boot01.service;
 
 import com.nomadlab.boot01.domain.Board;
 import com.nomadlab.boot01.dto.BoardDTO;
+import com.nomadlab.boot01.dto.BoardListReplyCountDTO;
 import com.nomadlab.boot01.dto.PageRequestDTO;
 import com.nomadlab.boot01.dto.PageResponseDTO;
 import com.nomadlab.boot01.repository.BoardRepository;
@@ -68,6 +69,21 @@ public class BoardServiceImpl implements BoardService{
         return PageResponseDTO.<BoardDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .boardList(boardDTOList)
+                .total((int)result.getTotalElements())
+                .build();
+    }
+
+    @Override
+    public PageResponseDTO<BoardListReplyCountDTO> listWithReplyCount(PageRequestDTO pageRequestDTO) {
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("bno");
+
+        Page<BoardListReplyCountDTO> result = boardRepository.searchWithReplyCount(types, keyword, pageable);
+
+        return PageResponseDTO.<BoardListReplyCountDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .boardList(result.getContent())
                 .total((int)result.getTotalElements())
                 .build();
     }

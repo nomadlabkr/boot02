@@ -28,11 +28,20 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.projectlombok:lombok:1.18.22'
+    implementation 'org.modelmapper:modelmapper:3.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // swagger-ui
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.projectlombok:lombok:1.18.22'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // lombok을 테스트 환경에서도 사용.
@@ -51,8 +60,7 @@ dependencies {
 
             "com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
 
-    implementation 'org.modelmapper:modelmapper:3.1.0'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 }
 
 tasks.named('test') {
